@@ -1,0 +1,1192 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Rose - Toko Bunga Online</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap">
+    <style>
+        :root {
+            --primary: #e75480;
+            --secondary: #ffb6c1;
+            --accent: #98fb98;
+            --dark: #5d4037;
+            --light: #fff9f9;
+            --text: #333333;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, #e75480, #ffb6c1);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        .hamburger.open span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.open span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+        
+        .logo {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--accent);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+        
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0.8rem;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+        
+        nav ul li a:hover, nav ul li a.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1464207687429-7505649dae38?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(231, 84, 128, 0.8);
+            border-radius: 10px;
+        }
+        
+        .hero h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--dark);
+            padding: 0.8rem 1.5rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .btn:hover {
+            background-color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            text-align: center;
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 3px;
+            background-color: var(--accent);
+            margin: 10px auto;
+        }
+        
+        .categories {
+            margin-bottom: 4rem;
+        }
+        
+        .category-list {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        
+        .category-btn {
+            padding: 0.8rem 1.8rem;
+            background-color: white;
+            border: 2px solid var(--secondary);
+            border-radius: 30px;
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .category-btn:hover, .category-btn.active {
+            background-color: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .product-slider {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px var(--shadow);
+            background-color: white;
+            padding: 1.5rem;
+        }
+        
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            gap: 1.5rem;
+            padding: 1rem;
+        }
+        
+        .product-card {
+            min-width: 250px;
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow);
+            transition: transform 0.3s;
+            flex: 1;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .product-img {
+            height: 200px;
+            width: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 1.2rem;
+        }
+        
+        .product-name {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        .product-price {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background-color 0.3s;
+            width: 100%;
+            margin-bottom: 0.5rem;
+        }
+
+        .add-to-cart-btn:hover {
+            background-color: var(--dark);
+        }
+
+        .add-to-cart-btn.clicked {
+            background-color: var(--accent);
+            color: var(--dark);
+            transform: scale(0.95);
+            animation: buttonClick 0.3s ease;
+        }
+
+        @keyframes buttonClick {
+            0% { transform: scale(1); }
+            50% { transform: scale(0.95); }
+            100% { transform: scale(1); }
+        }
+
+        .cart-popup {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px var(--shadow);
+            padding: 1rem;
+            max-width: 300px;
+            z-index: 1001;
+            display: none;
+        }
+
+        .cart-popup.show {
+            display: block;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .cart-header h3 {
+            color: var(--primary);
+            margin: 0;
+        }
+
+        .cart-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        .cart-items {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 1rem;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .cart-item-info {
+            flex: 1;
+        }
+
+        .remove-btn {
+            background: none;
+            border: none;
+            color: var(--primary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.2rem;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .remove-btn:hover {
+            background-color: rgba(231, 84, 128, 0.1);
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-item-name {
+            flex: 1;
+            font-size: 0.9rem;
+        }
+
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .cart-total {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: var(--dark);
+            text-align: center;
+            padding: 0.5rem 0;
+            border-top: 2px solid var(--primary);
+        }
+
+        .checkout-btn {
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .checkout-btn:hover {
+            background-color: white;
+            border: 2px solid var(--accent);
+        }
+
+        .cart-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px var(--shadow);
+            z-index: 1000;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: var(--accent);
+            color: var(--dark);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+        
+        .slider-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .slider-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: var(--secondary);
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .slider-dot.active {
+            background-color: var(--primary);
+        }
+        
+        .services {
+            background-color: #fff0f5;
+            padding: 4rem 0;
+            margin-bottom: 4rem;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px var(--shadow);
+        }
+        
+        .service-icon {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .service-card h3 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 3rem 0 1.5rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+        
+        @media (max-width: 767px) {
+            .header-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            nav ul {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--primary);
+                flex-direction: column;
+                padding: 1rem 0;
+                margin: 0;
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            }
+
+            nav ul.show {
+                display: flex;
+            }
+
+            nav ul li {
+                margin: 0.5rem 0;
+                text-align: center;
+            }
+
+            nav ul li a {
+                padding: 0.8rem 1rem;
+                display: block;
+            }
+
+            .hero {
+                height: 60vh;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .product-card {
+                min-width: 180px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .slider-container {
+                gap: 1rem;
+            }
+        }
+
+        @media (min-width: 768px) and (max-width: 1023px) {
+            .hero {
+                height: 70vh;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .section-title {
+                font-size: 2.5rem;
+            }
+
+            .product-card {
+                min-width: 220px;
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-spa"></i>
+                <span>Black Rose</span>
+            </div>
+            <nav>
+                <div class="hamburger" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+                <ul id="nav-menu">
+                    <li><a href="#" class="active">Beranda</a></li>
+                    <li><a href="#produk">Produk</a></li>
+                    <li><a href="#tentang">Tentang</a></li>
+                    <li><a href="#layanan">Layanan</a></li>
+                    <li><a href="#kontak">Kontak</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Keindahan dalam Setiap Kelopak</h1>
+            <p>Black Rose menawarkan rangkaian bunga terbaik untuk setiap momen spesial dalam hidup Anda. Dari buket romantis hingga dekorasi pernikahan, kami menghadirkan keindahan alam langsung ke tangan Anda.</p>
+            <a href="#produk" class="btn">Lihat Koleksi Bunga</a>
+        </div>
+    </section>
+
+    <section id="produk" class="container categories">
+        <h2 class="section-title">Koleksi Bunga Kami</h2>
+        <div class="category-list">
+            <button class="category-btn active" data-category="all">Semua</button>
+            <button class="category-btn" data-category="buket">Buket</button>
+            <button class="category-btn" data-category="mawar">Mawar</button>
+            <button class="category-btn" data-category="anggrek">Anggrek</button>
+           
+        </div>
+
+        <!-- Slider untuk Buket Bunga -->
+        <div class="product-slider" id="slider-buket">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Buket Bunga Istimewa</h3>
+            <div class="slider-container" id="slider-container-buket">
+                <div class="product-card">
+                    <img src="merah.jpeg" alt="Buket Mawar Merah" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Buket Mawar Merah Romantis</h4>
+                        <p class="product-price">Rp 350.000</p>
+                        <button class="add-to-cart-btn" data-name="Buket Mawar Merah Romantis" data-price="350000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Buket indah berisi 24 tangkai mawar merah segar, sempurna untuk ungkapan cinta.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="hitampink.jpeg" alt="Buket Bunga Hitam Pink" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Buket Bunga Hitam Pink</h4>
+                        <p class="product-price">Rp 275.000</p>
+                        <button class="add-to-cart-btn" data-name="Buket Bunga Hitam Pink" data-price="275000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Perpaduan warna-warni bunga segar yang cocok untuk segala suasana.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="pink.jpeg" alt="Buket Bunga pink lucu" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Buket Bunga pink</h4>
+                        <p class="product-price">Rp 320.000</p>
+                        <button class="add-to-cart-btn" data-name="Buket Bunga pink" data-price="320000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Keceriaan bunga mawar pink yang membawa kehangatan dan kebahagiaan.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="slider-dot active" data-slider="buket" data-index="0"></div>
+                <div class="slider-dot" data-slider="buket" data-index="1"></div>
+                <div class="slider-dot" data-slider="buket" data-index="2"></div>
+            </div>
+        </div>
+
+        <!-- Slider untuk Mawar -->
+        <div class="product-slider" id="slider-mawar">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Koleksi Mawar Eksklusif</h3>
+            <div class="slider-container" id="slider-container-mawar">
+                <div class="product-card">
+                    <img src="merahpremium.jpeg" alt="Mawar Merah" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Mawar Merah Premium</h4>
+                        <p class="product-price">Rp 25.000/tangkai</p>
+                        <button class="add-to-cart-btn" data-name="Mawar Merah Premium" data-price="25000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Mawar merah segar dengan kelopak tebal dan aroma yang harum.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="putihelegant.jpeg" alt="Mawar Putih" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Mawar Putih Elegant</h4>
+                        <p class="product-price">Rp 22.000/tangkai</p>
+                        <button class="add-to-cart-btn" data-name="Mawar Putih Elegant" data-price="22000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Mawar putih yang melambangkan kesucian dan kemurnian.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="pinkmanis.jpeg" alt="Mawar Pink" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Mawar Pink Manis</h4>
+                        <p class="product-price">Rp 20.000/tangkai</p>
+                        <button class="add-to-cart-btn" data-name="Mawar Pink Manis" data-price="20000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Mawar pink yang lembut, cocok untuk ungkapan kasih sayang.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="slider-dot active" data-slider="mawar" data-index="0"></div>
+                <div class="slider-dot" data-slider="mawar" data-index="1"></div>
+                <div class="slider-dot" data-slider="mawar" data-index="2"></div>
+            </div>
+        </div>
+
+        <!-- Slider untuk Anggrek -->
+        <div class="product-slider" id="slider-anggrek">
+            <h3 style="color: var(--primary); margin-bottom: 1.5rem; text-align: center;">Anggrek Langka & Eksotis</h3>
+            <div class="slider-container" id="slider-container-anggrek">
+                <div class="product-card">
+                    <img src="anggrekp.jpeg" alt="Anggrek Bulan" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Anggrek Bulan Putih</h4>
+                        <p class="product-price">Rp 450.000</p>
+                        <button class="add-to-cart-btn" data-name="Anggrek Bulan Putih" data-price="450000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Anggrek bulan putih dengan bunga besar dan tahan lama.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="anggreku.jpeg" alt="Anggrek Ungu" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Anggrek Ungu Royal</h4>
+                        <p class="product-price">Rp 520.000</p>
+                        <button class="add-to-cart-btn" data-name="Anggrek Ungu Royal" data-price="520000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Anggrek ungu dengan corak yang indah dan elegan.</p>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <img src="anggreku.jpeg" alt="Anggrek Mini" class="product-img">
+                    <div class="product-info">
+                        <h4 class="product-name">Anggrek Mini Rainbow</h4>
+                        <p class="product-price">Rp 380.000</p>
+                        <button class="add-to-cart-btn" data-name="Anggrek Mini Rainbow" data-price="380000">Tambah ke Keranjang</button>
+                        <p class="product-desc">Anggrek mini dengan perpaduan warna yang menarik.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <div class="slider-dot active" data-slider="anggrek" data-index="0"></div>
+                <div class="slider-dot" data-slider="anggrek" data-index="1"></div>
+                <div class="slider-dot" data-slider="anggrek" data-index="2"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="tentang" class="container" style="padding: 4rem 0; margin-bottom: 4rem;">
+        <h2 class="section-title">Tentang Black Rose</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3rem; align-items: center;">
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.8rem;">Cerita Kami</h3>
+                <p style="line-height: 1.8; margin-bottom: 1.5rem;">
+                    Black Rose didirikan pada tahun 2020 dengan visi untuk menghadirkan keindahan alam melalui rangkaian bunga berkualitas tinggi. Kami percaya bahwa setiap kelopak bunga memiliki cerita unik yang dapat menyentuh hati dan menciptakan momen-momen tak terlupakan.
+                </p>
+                <p style="line-height: 1.8; margin-bottom: 1.5rem;">
+                    Dengan pengalaman bertahun-tahun dalam dunia floristik, tim kami yang profesional berkomitmen untuk memberikan pelayanan terbaik kepada setiap pelanggan. Kami mengutamakan kualitas, kesegaran, dan kreativitas dalam setiap rangkaian bunga yang kami buat.
+                </p>
+            </div>
+            <div>
+                <h3 style="color: var(--primary); margin-bottom: 1.5rem; font-size: 1.8rem;">Visi & Misi</h3>
+                <div style="background-color: white; padding: 2rem; border-radius: 10px; box-shadow: 0 5px 15px var(--shadow);">
+                    <h4 style="color: var(--dark); margin-bottom: 1rem;">Visi</h4>
+                    <p style="margin-bottom: 1.5rem; color: var(--text);">
+                        Menjadi toko bunga terdepan di Indonesia yang menghadirkan keindahan alam melalui inovasi dan pelayanan berkualitas tinggi.
+                    </p>
+                    <h4 style="color: var(--dark); margin-bottom: 1rem;">Misi</h4>
+                    <ul style="color: var(--text); line-height: 1.8;">
+                        <li>Menyediakan bunga-bunga segar berkualitas premium</li>
+                        <li>Menciptakan rangkaian bunga yang unik dan personal</li>
+                        <li>Memberikan pelayanan cepat dan profesional</li>
+                        <li>Menjadi mitra terpercaya untuk setiap momen spesial</li>
+                        <li>Mendukung komunitas lokal melalui program-program sosial</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div style="text-align: center; margin-top: 3rem;">
+            <h3 style="color: var(--primary); margin-bottom: 1rem;">Mengapa Memilih Black Rose?</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                <div style="background-color: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px var(--shadow);">
+                    <i class="fas fa-leaf" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">Bunga Segar</h4>
+                    <p style="color: var(--text);">Semua bunga kami dipilih langsung dari petani terpercaya untuk memastikan kesegaran maksimal.</p>
+                </div>
+                <div style="background-color: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px var(--shadow);">
+                    <i class="fas fa-palette" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">Desain Kreatif</h4>
+                    <p style="color: var(--text);">Tim desainer kami menciptakan rangkaian bunga yang unik dan sesuai dengan kepribadian Anda.</p>
+                </div>
+                <div style="background-color: white; padding: 1.5rem; border-radius: 10px; box-shadow: 0 5px 15px var(--shadow);">
+                    <i class="fas fa-clock" style="font-size: 2rem; color: var(--accent); margin-bottom: 1rem;"></i>
+                    <h4 style="color: var(--dark); margin-bottom: 0.5rem;">Pengiriman Cepat</h4>
+                    <p style="color: var(--text);">Layanan pengiriman 24/7 untuk memastikan bunga sampai tepat waktu di tangan Anda.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="layanan" class="services">
+        <div class="container">
+            <h2 class="section-title">Layanan Kami</h2>
+            <div class="service-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3>Pengiriman Cepat</h3>
+                    <p>Kami mengirimkan bunga segar langsung ke alamat Anda dalam waktu 2-4 jam.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Kemasan Eksklusif</h3>
+                    <p>Setiap rangkaian bunga dikemas dengan indah dan sesuai tema acara.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <h3>Custom Order</h3>
+                    <p>Kami menerima pesanan khusus sesuai dengan keinginan dan kebutuhan Anda.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Konsultasi Gratis</h3>
+                    <p>Tim kami siap membantu Anda memilih bunga yang tepat untuk setiap kesempatan.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="kontak">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Black Rose</h3>
+                    <p>Toko bunga online yang menyediakan berbagai macam bunga segar dan rangkaian bunga untuk setiap momen spesial dalam hidup Anda.</p>
+                    <div class="social-icons">
+                        <a href="https://instagram.com/mdffaprtma" target="_blank"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="https://wa.me/+6282282090441?text=Halo%20Owner%20Black%20Rose%2C%20saya%20ingin%20berkonsultasi%20untuk%20membeli%20bunga.%20Bisakah%20Anda%20membantu%20saya%3F" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <h3>Kategori Produk</h3>
+                    <ul class="footer-links">
+                        <li><a href="#produk">Buket Bunga</a></li>
+                        <li><a href="#produk">Mawar</a></li>
+                        <li><a href="#produk">Anggrek</a></li>
+                        
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Kontak Kami</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Bunga Indah No. 123, Lampung</li>
+                        <li><i class="fas fa-phone"></i> (021) 555-7890</li>
+                        <li><i class="fas fa-envelope"></i> info@BlackkRose.com</li>
+                        <li><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 20.00 WIB</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Black Rose - Toko Bunga Online. Semua hak dilindungi.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Popup -->
+    <div class="cart-popup" id="cart-popup">
+        <div class="cart-header">
+            <h3>Keranjang Belanja</h3>
+            <button class="cart-close" id="cart-close">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            <!-- Cart items will be added here -->
+        </div>
+        <div class="cart-total" id="cart-total">Total: Rp 0</div>
+        <button class="checkout-btn" id="checkout-btn">Checkout via WhatsApp</button>
+    </div>
+
+    <!-- Floating Cart Icon -->
+    <button class="cart-icon" id="cart-icon">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cart-count">0</span>
+    </button>
+
+    <script>
+        // Fungsi untuk slider
+        document.addEventListener('DOMContentLoaded', function() {
+            const sliders = document.querySelectorAll('.slider-container');
+            const dots = document.querySelectorAll('.slider-dot');
+            
+            // Inisialisasi posisi slider
+            sliders.forEach(slider => {
+                slider.style.transform = 'translateX(0)';
+            });
+            
+            // Fungsi untuk menggeser slider
+            function moveSlider(sliderId, index) {
+                const slider = document.getElementById(`slider-container-${sliderId}`);
+                const cardWidth = 250 + 24; // 250px card width + 24px gap
+                const translateX = -index * cardWidth;
+                slider.style.transform = `translateX(${translateX}px)`;
+                
+                // Update dots aktif
+                document.querySelectorAll(`.slider-dot[data-slider="${sliderId}"]`).forEach(dot => {
+                    dot.classList.remove('active');
+                });
+                document.querySelector(`.slider-dot[data-slider="${sliderId}"][data-index="${index}"]`).classList.add('active');
+            }
+            
+            // Event listener untuk dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', function() {
+                    const sliderId = this.getAttribute('data-slider');
+                    const index = parseInt(this.getAttribute('data-index'));
+                    moveSlider(sliderId, index);
+                });
+            });
+            
+            // Fungsi untuk kategori filter
+            const categoryButtons = document.querySelectorAll('.category-btn');
+            const productSliders = document.querySelectorAll('.product-slider');
+            
+            // Tampilkan semua slider di awal
+            productSliders.forEach(slider => {
+                slider.style.display = 'block';
+            });
+            
+            // Event listener untuk kategori
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const category = this.getAttribute('data-category');
+                    
+                    // Update active button
+                    categoryButtons.forEach(btn => btn.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Tampilkan slider berdasarkan kategori
+                    if (category === 'all') {
+                        productSliders.forEach(slider => {
+                            slider.style.display = 'block';
+                        });
+                    } else {
+                        productSliders.forEach(slider => {
+                            if (slider.id === `slider-${category}`) {
+                                slider.style.display = 'block';
+                            } else {
+                                slider.style.display = 'none';
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Auto slide untuk setiap slider
+            setInterval(() => {
+                const activeSliders = document.querySelectorAll('.product-slider[style*="display: block"]');
+                
+                activeSliders.forEach(slider => {
+                    const sliderId = slider.id.replace('slider-', '');
+                    const activeDot = document.querySelector(`.slider-dot.active[data-slider="${sliderId}"]`);
+                    const dots = document.querySelectorAll(`.slider-dot[data-slider="${sliderId}"]`);
+                    
+                    if (activeDot) {
+                        let currentIndex = parseInt(activeDot.getAttribute('data-index'));
+                        let nextIndex = (currentIndex + 1) % dots.length;
+                        moveSlider(sliderId, nextIndex);
+                    }
+                });
+            }, 5000);
+            
+            // Hamburger menu toggle
+            const hamburger = document.getElementById('hamburger');
+            const navMenu = document.getElementById('nav-menu');
+
+            hamburger.addEventListener('click', () => {
+                navMenu.classList.toggle('show');
+                hamburger.classList.toggle('open');
+            });
+
+            // Close menu when clicking on nav links
+            document.querySelectorAll('#nav-menu a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navMenu.classList.remove('show');
+                    hamburger.classList.remove('open');
+                });
+            });
+
+            // Cart functionality
+            let cart = [];
+            const cartIcon = document.getElementById('cart-icon');
+            const cartPopup = document.getElementById('cart-popup');
+            const cartItems = document.getElementById('cart-items');
+            const cartTotal = document.getElementById('cart-total');
+            const cartCount = document.getElementById('cart-count');
+            const cartClose = document.getElementById('cart-close');
+
+            // Add to cart button event listeners
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Add animation class
+                    this.classList.add('clicked');
+                    setTimeout(() => {
+                        this.classList.remove('clicked');
+                    }, 300);
+
+                    const name = this.getAttribute('data-name');
+                    const price = parseInt(this.getAttribute('data-price'));
+
+                    // Add item to cart
+                    const existingItem = cart.find(item => item.name === name);
+                    if (existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({ name, price, quantity: 1 });
+                    }
+
+                    updateCart();
+                });
+            });
+
+            // Update cart display
+            function updateCart() {
+                cartItems.innerHTML = '';
+                let total = 0;
+                let itemCount = 0;
+
+                cart.forEach((item, index) => {
+                    total += item.price * item.quantity;
+                    itemCount += item.quantity;
+
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'cart-item';
+                    itemElement.innerHTML = `
+                        <div class="cart-item-info">
+                            <span class="cart-item-name">${item.name} (x${item.quantity})</span>
+                            <span class="cart-item-price">Rp ${(item.price * item.quantity).toLocaleString()}</span>
+                        </div>
+                        <button class="remove-btn" data-index="${index}" title="Hapus item">&times;</button>
+                    `;
+                    cartItems.appendChild(itemElement);
+                });
+
+                // Add event listeners for remove buttons
+                document.querySelectorAll('.remove-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        const index = parseInt(this.getAttribute('data-index'));
+                        cart.splice(index, 1);
+                        updateCart();
+                    });
+                });
+
+                cartTotal.textContent = `Total: Rp ${total.toLocaleString()}`;
+                cartCount.textContent = itemCount;
+            }
+
+            // Cart popup toggle
+            cartIcon.addEventListener('click', () => {
+                cartPopup.classList.toggle('show');
+            });
+
+            cartClose.addEventListener('click', () => {
+                cartPopup.classList.remove('show');
+            });
+
+            // Checkout via WhatsApp
+            const checkoutBtn = document.getElementById('checkout-btn');
+            checkoutBtn.addEventListener('click', () => {
+                if (cart.length === 0) {
+                    alert('Keranjang kosong. Tambahkan produk terlebih dahulu.');
+                    return;
+                }
+
+                let message = 'Halo, saya ingin memesan bunga berikut:\n\n';
+                let total = 0;
+
+                cart.forEach(item => {
+                    message += `${item.name} (x${item.quantity}) - Rp ${(item.price * item.quantity).toLocaleString()}\n`;
+                    total += item.price * item.quantity;
+                });
+
+                message += `\nTotal: Rp ${total.toLocaleString()}\n\nMohon konfirmasi pesanan saya. Terima kasih!`;
+
+                const whatsappUrl = `https://wa.me/+6282282090441?text=${encodeURIComponent(message)}`;
+                window.open(whatsappUrl, '_blank');
+            });
+
+            // Close cart when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!cartPopup.contains(e.target) && !cartIcon.contains(e.target)) {
+                    cartPopup.classList.remove('show');
+                }
+            });
+
+            // Smooth scroll untuk navigasi
+            document.querySelectorAll('nav a').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
